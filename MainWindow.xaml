@@ -1,0 +1,193 @@
+﻿<Window x:Class="CoDoR.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="CoDoR" FontSize="16" Height="500" Width="710" MinHeight="500" MinWidth="710" FontFamily="Verdana" Background="SeaShell">
+    <TabControl Background="SeaShell" BorderBrush="SeaShell">
+        <TabItem Header="Единичный расчет" FontFamily="Verdana" Background="Gainsboro">
+            <Grid Margin="-5,-3,-4,-5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition  MinHeight="60"></RowDefinition>
+                    <RowDefinition Height="46*"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="210" Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="35" MinHeight="35">
+                    <Button Name="Calculation" Height="35" FontSize="20" FontFamily="Verdana" Background="Gainsboro" Click="Calculation_Click" Margin="-5,0">Расчет</Button>
+                </StackPanel>
+                <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Height="62" Margin="0,8,0,7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <RadioButton Name="IsRotating"  Grid.Row="0"  Content="Вращающийся"  FontSize="16" FontFamily="Verdana" Margin="6 6" Checked="IsRotating_or_Not"/>
+                    <RadioButton Name="IsNotRotating" Grid.Row="1" IsChecked="True" Content="Невращающийся" FontSize="16" FontFamily="Verdana" Margin="6 3" Checked="IsRotating_or_Not"/>
+                </Grid>
+                <Grid Grid.Column="1"  Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Center" 
+                       Text="Температурные составляющие прогиба оси ролика" Margin="32,3,32,0" Height="27"></TextBlock>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*" ></ColumnDefinition>
+                            <ColumnDefinition Width="80*" ></ColumnDefinition>
+                            <ColumnDefinition Width="130*" ></ColumnDefinition>
+                            <ColumnDefinition Width="40*" ></ColumnDefinition>
+                            <ColumnDefinition Width="80*" ></ColumnDefinition>
+                            <ColumnDefinition Width="130*" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="16" Margin="2 2 2 0" HorizontalAlignment="Right">W =</TextBlock>
+                        <TextBox Name="Constituent_W" Grid.Column="1" FontSize="16" Background="Azure" TextAlignment="Center" Height="25" 
+                            VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+                        <TextBlock Grid.Column="2" FontSize="14" Margin="2 2 2 0" >мм/град Цельсия</TextBlock>
+                        <TextBlock Grid.Column="3" FontSize="16" Margin="2,2,2,0" HorizontalAlignment="Right" >V =</TextBlock>
+                        <TextBox Name="Constituent_V" Grid.Column="4" FontSize="16" Background="Azure" TextAlignment="Center" Height="25" 
+                            VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+                        <TextBlock Grid.Column="5" FontSize="14" Margin="2 2 2 0" >мм/град Цельсия</TextBlock>
+                    </Grid>
+                </Grid>
+                <TextBox x:Name="Results" Grid.Column="0" Grid.Row="2" IsReadOnly="True" Background="AliceBlue" TextWrapping="WrapWithOverflow" FontFamily="Verdana" AllowDrop="False"></TextBox>
+                <Grid Grid.Column="1"  Grid.Row="2"  MinHeight="347">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" 
+                       >Коэффициент линейного расширения материала ролика, 1/град</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4"  
+                       >Ширина сляба, мм</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4"
+                       >Длина ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4"
+                       >Внутренний радиус ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" 
+                       >Внешний радиус ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" 
+                      >Коэффициент Фурье на наружной поверхности ролика q1</TextBlock>
+                    <TextBlock Grid.Row="6" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" 
+                       >Коэффициент Фурье на наружной поверхности ролика q2</TextBlock>
+                    <TextBlock Grid.Row="7"  Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" 
+                       >Скорость разливки, м/мин</TextBlock>
+                    <TextBox x:Name="Coef_of_exp" Grid.Row="0" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue"></TextBox>
+                    <TextBox x:Name="Width_of_slab"  Grid.Row="1" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Lenght_of_roller" Grid.Row="2" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Inner_radius" Grid.Row="3" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Outer_radius" Grid.Row="4" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Coef_of_Fourier_q1"  Grid.Row="5" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Coef_of_Fourier_q2" Grid.Row="6" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="Speed_of_stream" Grid.Row="7" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" IsEnabled="False"></TextBox>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Цикл расчетов" FontFamily="Verdana" Background="Gainsboro">
+            <Grid ShowGridLines="False"  Background="SeaShell" Margin="-5,-4,-4,-6" >
+                <Grid.RowDefinitions>
+                    <RowDefinition  MinHeight="60" Height="*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="35" MaxHeight="35"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="210" Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="35" >
+                    <Button Name="SCalculation" Height="35" FontSize="20" Background="Gainsboro" Click="SCalculation_Click" Margin="-5,0">Расчет</Button>
+                </StackPanel>
+                <Grid Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Height="62" Margin="0,8,0,7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <RadioButton Name="SIsRotating"  Grid.Row="0"  Content="Вращающийся"  FontSize="16" Margin="6" Checked="SIsRotating_or_Not"/>
+                    <RadioButton Name="SIsNotRotating" Grid.Row="1" IsChecked="True" Content="Невращающийся" FontSize="16"  Margin="6 3" Checked="SIsRotating_or_Not"/>
+                </Grid>
+                <Grid Grid.Column="1"  Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                </Grid>
+                <TextBox x:Name="SResults" Grid.Column="0" Grid.Row="1" IsReadOnly="True" Background="AliceBlue" TextWrapping="Wrap" TextAlignment="Left"></TextBox>
+                <Grid Grid.Column="1"  Grid.Row="0" Grid.RowSpan="2" MinHeight="409">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="0.8*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" TextAlignment="Center" VerticalAlignment="Center">Шаг итерации</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" >Коэффициент линейного расширения материала ролика, 1/град</TextBlock>
+                    <DockPanel Grid.Row="2" Grid.Column="0">
+                        <TextBlock  DockPanel.Dock="Left" FontSize="16" TextWrapping="Wrap" Margin="10 4">Ширина сляба, мм</TextBlock>
+                        <TextBox x:Name="SWidth_of_slab_First" FontSize="16" TextWrapping="NoWrap" Margin="10 1" DockPanel.Dock="Right"
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    </DockPanel>
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4">Длина ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4">Внутренний радиус ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" >Внешний радиус ролика, мм</TextBlock>
+                    <TextBlock Grid.Row="6" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" >Коэффициент Фурье на наружной поверхности ролика q1</TextBlock>
+                    <TextBlock Grid.Row="7" Grid.Column="0" FontSize="16" TextWrapping="Wrap" Margin="10 4" >Коэффициент Фурье на наружной поверхности ролика q2</TextBlock>
+                    <DockPanel  Grid.Row="8"  Grid.Column="0" >
+                        <TextBlock FontSize="16" DockPanel.Dock="Left" TextWrapping="Wrap" Margin="10 4" Width="165" >Скорость разливки, м/мин</TextBlock>
+                        <TextBox x:Name="SSpeed_of_stream_First" DockPanel.Dock="Right" FontSize="16" TextWrapping="NoWrap" Margin="1 1 10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" IsEnabled="False"></TextBox>
+                    </DockPanel>
+                    <TextBox x:Name="SStep" Grid.Row="0" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue"></TextBox>
+                    <TextBox x:Name="SCoef_of_exp" Grid.Row="1" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue"></TextBox>
+                    <TextBox x:Name="SWidth_of_slab_Second"  Grid.Row="2" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SLenght_of_roller" Grid.Row="3" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SInner_radius" Grid.Row="4" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SOuter_radius" Grid.Row="5" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SCoef_of_Fourier_q1"  Grid.Row="6" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SCoef_of_Fourier_q2" Grid.Row="7" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" ></TextBox>
+                    <TextBox x:Name="SSpeed_of_stream_Second" Grid.Row="8" Grid.Column="1" FontSize="16" TextWrapping="NoWrap" Margin="10 1" 
+                       TextAlignment="Center"  Background="AliceBlue" IsEnabled="False"></TextBox>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
